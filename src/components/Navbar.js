@@ -1,34 +1,49 @@
-import React, { Component } from 'react'
-import {BiLogoInvision} from "react-icons/bi";
+import React, { Component, useState } from 'react'
+import Button from './Button';
+import {BiMenu} from "react-icons/bi";
 
 const Navbar = () => {
-   let links = [
-    {name:"Home", link:"/"},
-   ]
+   let Links = [
+    {name:"HOME", link:"/"},
+    {name:"SERVICE", link:"/"},
+    {name:"ABOUT", link:"/"},
+    {name:"BLOG'S", link:"/"},
+    {name:"CONTACT", link:"/"},
+   ];
+
+   let [open,setOpen]= useState(false);
   return (
   <div className='shadow-md w-full fixed top-0 left-0'>
+  <div className='md:flex items-center justify-between bg-black py-4 md:px-10 px-7'>
+ 
   
-   <nav>
-    <a>
-   < BiLogoInvision className='text-white font-bold  text-7xl cursor-pointer mr-1 pt-2'/>
-    </a>
-    <div className='md:flex items-center font-bold justify-between py-4 px-7 md:px-10   '>
+    < span className='text-white hover:text-blue-900 font-bold text-4xl  cursor-pointer mr-1 pt-2'> 
+        Designer
+        </span>
 
-        <ul className=' md:flex md:items-center md:pb-0 pb-12 absolute md:static'>
-        <li>home</li>
-        <li>home</li>
-        <li>home</li>
-        <li>home</li>
-        <li>home</li>
+<div  
+onClick={()=> setOpen(!open)}
+className='text-3xl absolute right-8 top-6 cursor-pointer md:hidden'>
+<BiMenu name={open ? 'close' : 'menu'}/>
+</div>
+
+        <ul className={`md:flex md:items-center bg-blue-800 md:z-auto z-[1] left-0 w-full md:w-auto md:pb-0 pb-12 absolute md:static md:pl-0 pl-9 transition-all duration-500 ease-in` }>
+      {
+        Links.map((link)=> (
+<li key={link.name} className='md:ml-8 text-xl md:my-0 my-7'>
+    <a href={link.link} className='text-white hover:text-blue-900 font-bold'>{link.name}</a>
+</li>
+        ) )
+      }
        </ul>
-    </div>
+   
 
-    
-    <button className='text-white'>
+    <Button className='text-white'>
         Get Started
-       </button>
+       </Button>
        
-   </nav>
+    
+   </div>
    </div>
   
   )
